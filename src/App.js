@@ -5,7 +5,7 @@ import Container from 'components/Container';
 import Section from 'components/Section';
 
 import ContactForm from 'components/ContactForm';
-// import Filter from 'components/Filter';
+import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 
 import './App.css';
@@ -22,28 +22,50 @@ class App extends Component {
     filter: '',
   };
 
-  addContact = ({name, number}) => {
+  addContact = ({ name, number }) => {
+    const { contacts } = this.state;
     const contact = {
       id: shortid.generate(),
       name,
       number,
     };
-    this.setState(prevState => ({
-      contacts: [contact, ...prevState.contacts]
-    }))
+
+    contacts.map(contact => contact.name).includes(name)
+    ? alert(`${name} is already in contacts.`)
+    : this.setState(prevState => ({
+    contacts: [contact, ...prevState.contacts] }))
   };
 
 
+
+    
+
+
+  changeFilter = e => {
+    this.setState({filter: e.currentTarget.value});
+  };
+
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizeFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizeFilter),
+    );
+  };
+
   deleteContact = contactId => {
-  this.setState(prevState => ({
-    contacts: prevState.contacts.filter(contact => contact.id !== contactId)
-  }))
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId)
+    }));
 };
 
   render() {
-    const { contacts } = this.state;
+    const { filter } = this.state;
     const addContact = this.addContact;
-    const onDeleteContact = this.deleteContact
+    const changeFilter = this.changeFilter;
+    const visibleContacts = this.getVisibleContacts();
+    const onDeleteContact = this.deleteContact;
 
   return (
     <Container title="Телефонная книга">
@@ -51,8 +73,8 @@ class App extends Component {
         <ContactForm onSubmit={addContact}/>
       </Section>
       <Section title="Contacts">
-        {/* <Filter/> */}
-        <ContactList contacts={contacts} onDeleteContact={onDeleteContact}/>
+        <Filter value={filter} onChange={changeFilter}/>
+        <ContactList contacts={visibleContacts} onDeleteContact={onDeleteContact}/>
       </Section>
     </Container>
   );
