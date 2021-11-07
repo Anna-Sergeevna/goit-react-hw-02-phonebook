@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import shortid from 'shortid';
 
 import Container from 'components/Container';
 import Section from 'components/Section';
 
-// import ContactForm from 'components/ContactForm';
+import ContactForm from 'components/ContactForm';
 // import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 
@@ -21,6 +22,18 @@ class App extends Component {
     filter: '',
   };
 
+  addContact = ({name, number}) => {
+    const contact = {
+      id: shortid.generate(),
+      name,
+      number,
+    };
+    this.setState(prevState => ({
+      contacts: [contact, ...prevState.contacts]
+    }))
+  };
+
+
   deleteContact = contactId => {
   this.setState(prevState => ({
     contacts: prevState.contacts.filter(contact => contact.id !== contactId)
@@ -29,15 +42,17 @@ class App extends Component {
 
   render() {
     const { contacts } = this.state;
+    const addContact = this.addContact;
+    const onDeleteContact = this.deleteContact
 
   return (
     <Container title="Телефонная книга">
       <Section title="Phonebook">
-        {/* <ContactForm/> */}
+        <ContactForm onSubmit={addContact}/>
       </Section>
       <Section title="Contacts">
         {/* <Filter/> */}
-        <ContactList contacts={contacts} onDeleteContact={this.deleteContact}/>
+        <ContactList contacts={contacts} onDeleteContact={onDeleteContact}/>
       </Section>
     </Container>
   );
