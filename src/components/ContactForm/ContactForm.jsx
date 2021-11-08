@@ -14,7 +14,6 @@ class ContactForm extends Component {
 
   handleChange = e => {
     const {name, value} = e.currentTarget
-
     this.setState({ [name]: value })
   };
 
@@ -29,7 +28,6 @@ class ContactForm extends Component {
     this.setState({name: '', number: ''});
   }
   
-
   render() {
     const { name, number } = this.state;
     const onChange = this.handleChange;
@@ -64,10 +62,9 @@ class ContactForm extends Component {
             />
         </label>
         <button type="submit" disabled={!name} className={s.button}>Add contact</button>
-        </form>
+      </form>
     );
   }
-
 }
 
 export default ContactForm;
