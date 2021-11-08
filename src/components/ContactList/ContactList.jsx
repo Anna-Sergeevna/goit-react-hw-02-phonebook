@@ -3,14 +3,17 @@ import s from './ContactList.module.css';
 
 const ContactList = ({ contacts, onDeleteContact }) => (
   <ul className={s.list}>
-    {contacts.map(({id, name, number}) => (
+    {contacts.map(({ id, name, number }) => (
       <li key={id} className={s.item}>
         <p className={s.name}>{name}:</p>
         <p className={s.number}>{number}</p>
         <button
-        type="button"
-        className={s.button}
-        onClick={() => onDeleteContact(id)}>Delete</button>
+          type='button'
+          className={s.button}
+          onClick={() => onDeleteContact(id)}
+        >
+          Delete
+        </button>
       </li>
     ))}
   </ul>

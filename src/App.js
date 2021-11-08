@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import shortid from 'shortid';
 import Container from 'components/Container';
 import Section from 'components/Section';
@@ -27,13 +27,14 @@ class App extends Component {
     };
 
     contacts.map(contact => contact.name).includes(name)
-    ? alert(`${name} is already in contacts.`)
-    : this.setState(prevState => ({
-    contacts: [contact, ...prevState.contacts] }))
+      ? alert(`${name} is already in contacts.`)
+      : this.setState(prevState => ({
+          contacts: [contact, ...prevState.contacts],
+        }));
   };
 
   changeFilter = e => {
-    this.setState({filter: e.currentTarget.value});
+    this.setState({ filter: e.currentTarget.value });
   };
 
   getVisibleContacts = () => {
@@ -47,7 +48,7 @@ class App extends Component {
 
   deleteContact = contactId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId)
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
@@ -59,13 +60,16 @@ class App extends Component {
     const onDeleteContact = this.deleteContact;
 
     return (
-      <Container title="Телефонная книга">
-        <Section title="Phonebook">
-          <ContactForm onSubmit={addContact}/>
+      <Container title='Телефонная книга'>
+        <Section title='Phonebook'>
+          <ContactForm onSubmit={addContact} />
         </Section>
-        <Section title="Contacts">
-          <Filter value={filter} onChange={changeFilter}/>
-          <ContactList contacts={visibleContacts} onDeleteContact={onDeleteContact}/>
+        <Section title='Contacts'>
+          <Filter value={filter} onChange={changeFilter} />
+          <ContactList
+            contacts={visibleContacts}
+            onDeleteContact={onDeleteContact}
+          />
         </Section>
       </Container>
     );

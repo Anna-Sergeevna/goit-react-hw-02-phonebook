@@ -5,7 +5,7 @@ const Filter = ({ value, onChange }) => (
   <label>
     <p className={s.text}>Find contacts by name</p>
     <input
-      type="text"
+      type='text'
       pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
       title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
       required
