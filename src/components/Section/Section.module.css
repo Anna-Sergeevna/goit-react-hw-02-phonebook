@@ -1,6 +1,12 @@
 .section {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  box-shadow: 5px 5px 5px rgba(146, 139, 139, 0.568),
+    -5px 5px 5px rgba(146, 139, 139, 0.568);
 }
 
 .title {
